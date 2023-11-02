@@ -7,7 +7,7 @@ on:
     branches:
       - main
     paths:
-      - '.github/workflows/deploy.yml'
+      - '.github/workflows/deploy-peaceiris.yml'
       - 'website/**'
 #    pull_request:
 
