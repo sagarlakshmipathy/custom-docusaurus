@@ -12,17 +12,17 @@ on:
 #    pull_request:
 
 jobs:
-    deploy:
+  deploy:
     runs-on: ubuntu-latest
     permissions:
-        contents: write
+      contents: write
     concurrency:
-        group: ${{ github.workflow }}-${{ github.ref }}
+      group: ${{ github.workflow }}-${{ github.ref }}
     defaults:
-        run:
-        working-directory: website
+      run:
+      working-directory: website
     steps:
-        - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -36,10 +36,10 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
-            path: ${{ steps.yarn-cache.outputs.YARN_CACHE_DIR }}
-            key: ${{ runner.os }}-website-${{ hashFiles('**/yarn.lock') }}
-            restore-keys: |
-            ${{ runner.os }}-website-
+          path: ${{ steps.yarn-cache.outputs.YARN_CACHE_DIR }}
+          key: ${{ runner.os }}-website-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+          ${{ runner.os }}-website-
 
       - run: yarn install --frozen-lockfile
       - run: yarn build
@@ -48,5 +48,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         if: github.ref == 'refs/heads/main'
         with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_dir: ./website/build
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./website/build
