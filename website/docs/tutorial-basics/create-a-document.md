@@ -1,4 +1,3 @@
----
 sidebar_position: 2
 ---
 
@@ -55,3 +54,10 @@ export default {
   ],
 };
 ```
+
+## New page here
+
+lorem ipsum
+lorem ipsum
+lorem ipsum
+lorem ipsum
