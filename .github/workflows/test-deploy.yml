@@ -32,7 +32,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: '**/yarn.lock'
+          cache: 'yarn'
+          cache-dependency-path: '**/yarn.lock'
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
