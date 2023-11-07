@@ -15,37 +15,37 @@ jobs:
     defaults:
       run:
         working-directory: ./website
-    # steps:
-    #   - uses: actions/checkout@v3
-
-    #   - name: Setup Node
-    #     uses: actions/setup-node@v3
-    #     with:
-    #       node-version: '20'
-    #       cache: '**/yarn.lock'
-
-    #   - run: yarn install --frozen-lockfile
-    #   - run: yarn build
-
     steps:
       - uses: actions/checkout@v3
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: '20'
           cache: 'yarn'
-          cache-dependency-path: './website/yarn.lock'
-    
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          key: ${{ runner.os }}-website-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: ${{ runner.os }}-website-
 
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-      - name: Build website
-        run: yarn build
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+
+    # steps:
+    #   - uses: actions/checkout@v3
+    #   - name: Setup Node
+    #     uses: actions/setup-node@v3
+    #     with:
+    #       node-version: 20
+    #       cache: 'yarn'
+    #       cache-dependency-path: './website/yarn.lock'
+    
+    #   - name: Cache dependencies
+    #     uses: actions/cache@v3
+    #     with:
+    #       key: ${{ runner.os }}-website-${{ hashFiles('**/yarn.lock') }}
+    #       restore-keys: ${{ runner.os }}-website-
+
+    #   - name: Install dependencies
+    #     run: yarn install --frozen-lockfile
+    #   - name: Build website
+    #     run: yarn build
 
     # steps:
     #   - uses: actions/checkout@v3
