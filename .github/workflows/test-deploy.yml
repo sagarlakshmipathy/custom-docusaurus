@@ -23,13 +23,7 @@ jobs:
         with:
           node-version: '20'
           cache: 'yarn'
-
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.yarn-cache.outputs.YARN_CACHE_DIR }}
-          key: ${{ runner.os }}-website-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: ${{ runner.os }}-website-
+          cache-dependency-path: ${{ steps.yarn-cache.outputs.$(yarn cache dir) }}
 
       - run: yarn install --frozen-lockfile
       - run: yarn build
