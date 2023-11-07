@@ -15,15 +15,26 @@ jobs:
     defaults:
       run:
         working-directory: ./website
+    # steps:
+    #   - uses: actions/checkout@v3
+
+    #   - name: Setup Node
+    #     uses: actions/setup-node@v3
+    #     with:
+    #       node-version: '20'
+    #       cache: '**/yarn.lock'
+
+    #   - run: yarn install --frozen-lockfile
+    #   - run: yarn build
+
     steps:
       - uses: actions/checkout@v3
-
-      - name: Setup Node
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '20'
-          cache: 'yarn'
-          cache-dependency-path: ${{ steps.yarn-cache.outputs.$(yarn cache dir) }}
+          node-version: 20
+          cache: yarn
 
-      - run: yarn install --frozen-lockfile
-      - run: yarn build
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Build website
+        run: yarn build
