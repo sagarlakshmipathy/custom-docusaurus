@@ -24,7 +24,7 @@ jobs:
           node-version: '20'
           cache: 'yarn'
 
-      - run: yarn install --frozen-lockfile
+      - run: yarn
       - run: yarn build
 
     # steps:
