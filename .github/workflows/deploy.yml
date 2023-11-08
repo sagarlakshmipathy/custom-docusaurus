@@ -27,17 +27,19 @@ jobs:
         uses: actions/setup-node@v3
         with:
             node-version: '20'
+            cache: 'npm'
+            cache-dependency-path: ./website/package-lock.json
 
-      - name: Get yarn cache
-        id: yarn-cache
-        run: echo "YARN_CACHE_DIR=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
+#      - name: Get npm cache
+#        id: npm-cache
+#        run: echo "NPM_CACHE_DIR=$(npm cache dir)" >> "${GITHUB_OUTPUT}"
 
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.yarn-cache.outputs.YARN_CACHE_DIR }}
-          key: ${{ runner.os }}-website-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: ${{ runner.os }}-website-
+#      - name: Cache dependencies
+#        uses: actions/cache@v3
+#        with:
+#          path: ${{ steps.yarn-cache.outputs.YARN_CACHE_DIR }}
+#          key: ${{ runner.os }}-website-${{ hashFiles('**/yarn.lock') }}
+#          restore-keys: ${{ runner.os }}-website-
 
       - run: yarn install --frozen-lockfile
       - run: yarn build
