@@ -1,16 +1,16 @@
-name: Site Test Build
+name: Site Build
 
 on:
   pull_request:
     branches:
       - main
     paths:
-      - '.github/workflows/site-test.yml'
+      - '.github/workflows/site-build.yml'
       - 'website/**'
 
 jobs:
-  site-test-build:
-    name: Site Test Build
+  site-build:
+    name: Site Build
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -25,52 +25,5 @@ jobs:
           cache: 'npm'
           cache-dependency-path: ./website/package-lock.json
 
-#      - uses: actions/cache@v3
-#        with:
-#          path: '~/.npm'
-#          key: ${{ runner.os }}-website-${{ hashFiles('**/package-lock.json') }}
-
       - run: npm install --frozen-lockfile
       - run: npm run build
-
-    # steps:
-    #   - uses: actions/checkout@v3
-    #   - name: Setup Node
-    #     uses: actions/setup-node@v3
-    #     with:
-    #       node-version: 20
-    #       cache: 'yarn'
-    #       cache-dependency-path: './website/yarn.lock'
-    
-    #   - name: Cache dependencies
-    #     uses: actions/cache@v3
-    #     with:
-    #       key: ${{ runner.os }}-website-${{ hashFiles('**/yarn.lock') }}
-    #       restore-keys: ${{ runner.os }}-website-
-
-    #   - name: Install dependencies
-    #     run: yarn install --frozen-lockfile
-    #   - name: Build website
-    #     run: yarn build
-
-    # steps:
-    #   - uses: actions/checkout@v3
-
-    #   - name: Setup Node
-    #     uses: actions/setup-node@v3
-    #     with:
-    #       node-version: '20'
-
-    #   - name: Get yarn cache
-    #     id: yarn-cache
-    #     run: echo "YARN_CACHE_DIR=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
-
-    #   - name: Cache dependencies
-    #     uses: actions/cache@v3
-    #     with:
-    #       path: ${{ steps.yarn-cache.outputs.YARN_CACHE_DIR }}
-    #       key: ${{ runner.os }}-website-${{ hashFiles('**/yarn.lock') }}
-    #       restore-keys: ${{ runner.os }}-website-
-
-    #   - run: yarn install --frozen-lockfile
-    #   - run: yarn build
